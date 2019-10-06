@@ -17,7 +17,7 @@ public class SockMerchantTest {
             "1|0",
             "1;1;1;1|2"
     })
-    public void sockMerchant1(@IntArrayParam final int[] input, final int expected) {
+    public void sockMerchant(@IntArrayParam final int[] input, final int expected) {
         assertEquals(expected, SockMerchant.sockMerchant(0, input));
     }
 }
