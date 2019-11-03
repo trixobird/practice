@@ -53,7 +53,7 @@ public class CountTripletsTest {
 
     @Test
     public void countTripletsBigInput3r() throws IOException {
-        Scanner input = new Scanner(new File ("src/test/resources/interview/dictionarieshashmaps/input"));
+        Scanner input = new Scanner(new File ("src/test/resources/interview/dictionarieshashmaps/countTripletsTest/input"));
 
         String[] nr = input.nextLine().replaceAll("\\s+$", "").split(" ");
 
