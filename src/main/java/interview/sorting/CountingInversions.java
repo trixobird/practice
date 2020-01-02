@@ -1,5 +1,10 @@
 package interview.sorting;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 class CountingInversions {
 
     private CountingInversions() {
@@ -7,22 +12,29 @@ class CountingInversions {
 
     static long countInversions(int[] arr) {
 
-        int count = 0;
+        Map<Integer, List<Integer>> mapValIdx = new HashMap<>();
         for (int i = 0; i < arr.length; i++) {
-            for (int j = 0; j < arr.length - 1; j++) {
-                // Swap adjacent elements if they are in decreasing order
-                if (arr[j] > arr[j + 1]) {
-                    swap(arr, j, j + 1);
-                    count++;
+            mapValIdx.computeIfAbsent(arr[i], v -> new ArrayList<>())
+                    .add(i);
+        }
+
+        int count = 0;
+        int swap = 0;
+        for (Map.Entry<Integer, List<Integer>> entry : mapValIdx.entrySet()) {
+            for (int val : entry.getValue()) {
+                if (val > count) {
+                    swap += val - count;
                 }
+                count++;
+                mapValIdx.values().forEach(v -> {
+                    for (int i = 0; i < v.size(); i++) {
+                        if (v.get(i) < val) {
+                            v.set(i, v.get(i) + 1);
+                        }
+                    }
+                });
             }
         }
-        return count;
-    }
-
-    private static void swap(int[] a, int idx1, int idx2) {
-        int tmp = a[idx1];
-        a[idx1] = a[idx2];
-        a[idx2] = tmp;
+        return swap;
     }
 }
