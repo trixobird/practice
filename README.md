@@ -1,11 +1,7 @@
 # hackerrank
-Solutions to hackerrank problems
+Solutions to hackerrank problems and other practice tests
 
 https://www.hackerrank.com/
-
-## Compiling
-
-Tests need the tests-core repository
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
