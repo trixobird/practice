@@ -28,15 +28,10 @@ public class IOHelper {
         try (val br = new BufferedReader(new FileReader(path))) {
 
             final Map<Integer, Integer> teams = new HashMap<>();
-            Arrays.stream(br.readLine().split(" "))
-                    .skip(1).mapToInt(Integer::parseInt)
-                    .forEach(t -> {
-                        if (teams.containsKey(t)) {
-                            teams.put(t, teams.get(t) + 1);
-                        } else {
-                            teams.put(t, 1);
-                        }
-                    });
+            final String[] teamCounts = br.readLine().split(" ");
+            for (int i = 1; i < teamCounts.length; i++) {
+                teams.put(i + 1, Integer.parseInt(teamCounts[i]));
+            }
 
             val pizzas = new ArrayList<Pizza>();
             String line;
