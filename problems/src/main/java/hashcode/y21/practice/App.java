@@ -16,7 +16,7 @@ public final class App {
         final Algorithm algorithm = new Algorithm();
 
         runOne(ioHelper, algorithm, InputType.EXAMPLE);
-//        runAll(parser, algorithm);
+//        runAll(ioHelper, algorithm);
     }
 
     private static void runOne(final IOHelper ioHelper, final Algorithm algorithm, final InputType inputType) {
@@ -29,7 +29,7 @@ public final class App {
         Arrays.stream(InputType.values()).forEach(inputType -> {
             final Input input = ioHelper.parse(inputType);
             final Output output = algorithm.compute(input);
-            ioHelper.write(output, InputType.EXAMPLE);
+            ioHelper.write(output, inputType);
         });
 
     }

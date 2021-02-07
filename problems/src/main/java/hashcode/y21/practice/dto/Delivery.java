@@ -7,5 +7,5 @@ import java.util.List;
 @Value
 public class Delivery {
     int numberOfTeamMembers;
-    List<Integer> pizzas;
+    List<Long> pizzas;
 }

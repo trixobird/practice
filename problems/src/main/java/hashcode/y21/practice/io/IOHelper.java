@@ -23,7 +23,7 @@ public class IOHelper {
 
     @SneakyThrows
     public Input parse(final InputType inputType) {
-        val path = FOLDER_PATH + "input/" + inputType.getFileName();
+        val path = FOLDER_PATH + "input/" + inputType.getFileName() + ".in";
 
         try (val br = new BufferedReader(new FileReader(path))) {
 
@@ -50,7 +50,7 @@ public class IOHelper {
 
     @SneakyThrows
     public void write(final Output output, final InputType inputType) {
-        val path = FOLDER_PATH + "output/" + inputType.getFileName();
+        val path = FOLDER_PATH + "output/" + inputType.getFileName() + ".out";
 
         val sb = new StringBuilder();
         sb.append(output.getDeliveries().size()).append("\n");
