@@ -1,9 +1,9 @@
-package hashcode.y21.practice;
+package hashcode.y21.qualify;
 
-import hashcode.y21.practice.dto.Input;
-import hashcode.y21.practice.dto.Output;
-import hashcode.y21.practice.io.InputType;
-import hashcode.y21.practice.io.IOHelper;
+import hashcode.y21.qualify.dto.Input;
+import hashcode.y21.qualify.dto.InputType;
+import hashcode.y21.qualify.dto.Output;
+import hashcode.y21.qualify.io.IOHelper;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Arrays;
@@ -15,8 +15,8 @@ public final class App {
         final IOHelper ioHelper = new IOHelper();
         final Algorithm algorithm = new Algorithm();
 
-//        runOne(ioHelper, algorithm, InputType.EXAMPLE);
-        runAll(ioHelper, algorithm);
+        runOne(ioHelper, algorithm, InputType.EXAMPLE);
+//        runAll(ioHelper, algorithm);
     }
 
     private static void runOne(final IOHelper ioHelper, final Algorithm algorithm, final InputType inputType) {

@@ -4,11 +4,13 @@ import hashcode.y21.practice.dto.Delivery;
 import hashcode.y21.practice.dto.Input;
 import hashcode.y21.practice.dto.Output;
 import hashcode.y21.practice.dto.Pizza;
+import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
+@Slf4j
 public class Algorithm {
     public Output compute(final Input input) {
         List<Pizza> mostIngredientsPizzas = input.getPizzas().stream()
@@ -24,9 +26,32 @@ public class Algorithm {
             val numberOfTeams = entry.getValue();
             for (int i = 0; i < numberOfTeams; i++) {
                 if (mostIngredientsPizzas.size() >= numberOfMembers) {
-                    final Delivery delivery = new Delivery(numberOfMembers, mostIngredientsPizzas.subList(0, numberOfMembers).stream().map(Pizza::getId).collect(Collectors.toList()));
-                    deliveries.add(delivery);
-                    mostIngredientsPizzas = mostIngredientsPizzas.subList(numberOfMembers, mostIngredientsPizzas.size());
+                    val teamPizzas = new LinkedList<Long>();
+                    teamPizzas.add(mostIngredientsPizzas.get(0).getId());
+                    val ingredients = mostIngredientsPizzas.get(0).getIngredients();
+                    mostIngredientsPizzas = mostIngredientsPizzas.subList(1, mostIngredientsPizzas.size());
+
+                    for (int k = 0; k < numberOfMembers - 1; k++) {
+                        var ingredientsToCompare = new HashSet<>(ingredients);
+                        var maxIngredients = ingredients.size();
+                        Pizza chosenPizza = mostIngredientsPizzas.get(0);
+                        int chosenPizzaIdx = 0;
+                        for (int j = 0; j < mostIngredientsPizzas.size(); j++) {
+                            final Pizza pizza = mostIngredientsPizzas.get(j);
+                            ingredientsToCompare.addAll(pizza.getIngredients());
+                            if (ingredientsToCompare.size() > maxIngredients) {
+                                maxIngredients = ingredientsToCompare.size();
+                                chosenPizza = pizza;
+                                chosenPizzaIdx = j;
+                            }
+                            ingredientsToCompare = new HashSet<>(ingredients);
+                        }
+                        log.debug("TeamMember {} in team {} with number of members {} will eat pizza {}", k + 1, i, numberOfMembers, chosenPizza);
+                        teamPizzas.add(chosenPizza.getId());
+                        mostIngredientsPizzas.remove(chosenPizzaIdx);
+                        ingredients.addAll(chosenPizza.getIngredients());
+                    }
+                    deliveries.add(new Delivery(numberOfMembers, teamPizzas));
                 } else {
                     break;
                 }

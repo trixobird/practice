@@ -8,15 +8,15 @@ import lombok.val;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.nio.ByteBuffer;
-import java.nio.CharBuffer;
-import java.nio.charset.Charset;
-import java.nio.charset.CharsetEncoder;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.stream.Collectors;
+
+import static util.StringUtils.stringBuilderToBytes;
 
 public class IOHelper {
     public static final String FOLDER_PATH = "problems/src/main/resources/hashcode/y21/practice/";
@@ -62,27 +62,5 @@ public class IOHelper {
 
 
         Files.write(Paths.get(path), stringBuilderToBytes(sb));
-    }
-
-    @SneakyThrows
-    public byte[] stringBuilderToBytes(final StringBuilder sb) {
-        Charset charset = StandardCharsets.US_ASCII;
-        CharsetEncoder encoder = charset.newEncoder();
-        CharBuffer buffer = CharBuffer.wrap(sb);
-        ByteBuffer byteBuffer = encoder.encode(buffer);
-
-        byte[] array;
-        int arrayLen = byteBuffer.limit();
-        if (arrayLen == byteBuffer.capacity()) {
-            array = byteBuffer.array();
-        } else {
-            // This will place two copies of the byte sequence in memory,
-            // until byteBuffer gets garbage-collected (which should happen
-            // pretty quickly once the reference to it is null'd).
-
-            array = new byte[arrayLen];
-            byteBuffer.get(array);
-        }
-        return array;
     }
 }
