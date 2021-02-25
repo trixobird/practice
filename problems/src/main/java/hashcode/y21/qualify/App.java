@@ -15,8 +15,8 @@ public final class App {
         final IOHelper ioHelper = new IOHelper();
         final Algorithm algorithm = new Algorithm();
 
-        runOne(ioHelper, algorithm, InputType.EXAMPLE);
-//        runAll(ioHelper, algorithm);
+//        runOne(ioHelper, algorithm, InputType.EXAMPLE);
+        runAll(ioHelper, algorithm);
     }
 
     private static void runOne(final IOHelper ioHelper, final Algorithm algorithm, final InputType inputType) {
