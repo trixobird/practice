@@ -15,14 +15,14 @@ public final class App {
         final IOHelper ioHelper = new IOHelper();
         final Algorithm algorithm = new Algorithm();
 
-//        runOne(ioHelper, algorithm, InputType.EXAMPLE);
+//        runOne(ioHelper, algorithm, InputType.BY_THE_OCEAN);
         runAll(ioHelper, algorithm);
     }
 
     private static void runOne(final IOHelper ioHelper, final Algorithm algorithm, final InputType inputType) {
         final Input input = ioHelper.parse(inputType);
         final Output output = algorithm.compute(input);
-        ioHelper.write(output, InputType.EXAMPLE);
+        ioHelper.write(output, inputType);
     }
 
     private static void runAll(final IOHelper ioHelper, final Algorithm algorithm) {
